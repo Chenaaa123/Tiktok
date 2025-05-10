@@ -1,5 +1,6 @@
 {
   "src": [
-    "pages/Index"
+    "Discover/page/Discover",
+    "Discover/page/text1"
   ]
 }
