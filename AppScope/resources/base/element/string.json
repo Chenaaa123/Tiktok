@@ -2,7 +2,11 @@
   "string": [
     {
       "name": "app_name",
+<<<<<<< HEAD
       "value": "HarmonyOSFinalassignments"
+=======
+      "value": "Tiktok"
+>>>>>>> ff7103515f6bc112ca6bc2d991a62918637a45e7
     }
   ]
 }
