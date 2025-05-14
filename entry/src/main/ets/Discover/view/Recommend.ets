@@ -1,8 +1,10 @@
-import DividerTmp from "../model/DividerTmpModel"
+import DividerTmp from "../model/DividerTmp"
 import { recommendList } from "../model/RecommendList"
 import { users } from "../model/UserModel"
 import RecommendItem from "../viewmodel/RecommendListItem"
 import User from "../viewmodel/UserItem"
+import { router } from "@kit.ArkUI"
+import { BusinessError } from "@kit.BasicServicesKit"
 
 // 推荐
 @Component
@@ -22,6 +24,15 @@ export default struct Recommend {
           .fontColor(Color.White)
           .fontSize(12)
           .fontWeight(400)
+          .onClick(()=>{
+            router.pushUrl({
+              url: 'Discover/page/TrendingContent'
+            }).then(() => {
+              console.info('push page success');
+            }).catch((err: BusinessError) => {
+              console.error(`pushUrl failed, code is ${err.code}, message is ${err.message}`);
+            })
+          })
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
@@ -31,7 +42,6 @@ export default struct Recommend {
           Image($r('app.media.pexels'))
             .width(170)
             .height(170)
-            .margin({ left: 5 })
             .objectFit(ImageFit.Cover)
             .borderRadius(20)
           Column() {
@@ -45,7 +55,8 @@ export default struct Recommend {
               .fontColor(Color.White)
               .margin({ bottom: 10 ,left: 10})
           }.alignItems(HorizontalAlign.Start)
-        }
+        }.width('50%')
+        .margin({ left: 10 })
 
         Stack({ alignContent: Alignment.BottomStart }) {
           Image($r('app.media.rock'))
@@ -65,7 +76,8 @@ export default struct Recommend {
               .fontColor(Color.White)
               .margin({ bottom: 10 ,left: 10})
           }.alignItems(HorizontalAlign.Start)
-        }
+        }.width('50%')
+        .margin({ right: 10 })
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
@@ -83,12 +95,21 @@ export default struct Recommend {
           .fontColor(Color.White)
           .fontSize(12)
           .fontWeight(400)
+          .onClick(()=>{
+            router.pushUrl({
+              url: 'Discover/page/CreatorsAll'
+            }).then(() => {
+              console.info('push page success');
+            }).catch((err: BusinessError) => {
+              console.error(`pushUrl failed, code is ${err.code}, message is ${err.message}`);
+            })
+          })
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
 
       Row() {
-        ForEach(users, (user: User) => {
+        ForEach(users.slice(0, 4), (user: User) => {
           Column() {
             Image(user.avatar)
               .width(60)
@@ -96,7 +117,7 @@ export default struct Recommend {
               .borderRadius(30)
               .margin({ bottom: 8 })
 
-            Text(user.username)
+            Text(user.name)
               .fontSize(12)
               .fontWeight(500)
               .fontColor('#333333')
@@ -146,7 +167,7 @@ export default struct Recommend {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .fontColor(Color.White)
                 Row(){
-                  Text(item.author.username)
+                  Text(item.author.name)
                     .fontSize(12)
                     .opacity(0.8)
                     .fontColor(Color.White)

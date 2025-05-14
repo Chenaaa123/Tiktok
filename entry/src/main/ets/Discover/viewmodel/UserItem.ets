@@ -1,12 +1,26 @@
 // 定义用户接口
-export default class  User{
-  id : number
-  avatar: Resource;   // 头像
-  username: string;   // 用户名
+export default class User {
+  id: number
+  name: string
+  avatar: Resource
+  fans: string
+  videos: string
+  description: string
+  tags: Array<string>
+  category: string
+  followed: boolean
 
-  constructor(id : number,avatar: Resource,username: string) {
+  constructor(id: number, name: string, avatar: Resource, fans: string, videos: string,
+    description: string, tags: Array<string>, category: string, followed: boolean) {
     this.id = id
+    this.name = name
     this.avatar = avatar
-    this.username = username
+    this.fans = fans
+    this.videos = videos
+    this.description = description
+    this.tags = tags
+    this.category = category
+    this.followed = followed
   }
 }
+

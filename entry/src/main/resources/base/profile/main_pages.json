@@ -1,6 +1,8 @@
 {
   "src": [
     "Discover/page/Discover",
-    "Discover/page/text1"
+    "Discover/page/text1",
+    "Discover/page/CreatorsAll",
+    "Discover/page/TrendingContent"
   ]
 }
