@@ -1,5 +1,6 @@
 {
   "src": [
+    "Messages/pages/Messages"
     "Discover/page/Discover",
     "Discover/page/text1",
     "Discover/page/CreatorsAll",

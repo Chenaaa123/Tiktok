@@ -1,6 +1,10 @@
 {
   "app": {
+<<<<<<< HEAD
+    "bundleName": "com.example.harmonyosfinalassignments",
+=======
     "bundleName": "com.example.tiktok",
+>>>>>>> ff7103515f6bc112ca6bc2d991a62918637a45e7
     "vendor": "example",
     "versionCode": 1000000,
     "versionName": "1.0.0",
