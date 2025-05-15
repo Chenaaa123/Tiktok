@@ -1,10 +1,10 @@
-import DividerTmp from "../model/DividerTmp"
-import { recommendList } from "../model/RecommendList"
-import { users } from "../model/UserModel"
-import RecommendItem from "../viewmodel/RecommendListItem"
-import User from "../viewmodel/UserItem"
+import DividerTmp from "../viewmodel/DividerTmp"
+import { recommendList } from "../viewmodel/RecommendList"
+import RecommendItem from "../view/RecommendListItem"
+import CreatorItem from "../view/CreatorItem"
 import { router } from "@kit.ArkUI"
 import { BusinessError } from "@kit.BasicServicesKit"
+import { CreatorList } from "../viewmodel/CreatorList"
 
 // 推荐
 @Component
@@ -26,7 +26,7 @@ export default struct Recommend {
           .fontWeight(400)
           .onClick(()=>{
             router.pushUrl({
-              url: 'Discover/page/TrendingContent'
+              url: 'Discover/pages/TrendingContent'
             }).then(() => {
               console.info('push page success');
             }).catch((err: BusinessError) => {
@@ -97,7 +97,7 @@ export default struct Recommend {
           .fontWeight(400)
           .onClick(()=>{
             router.pushUrl({
-              url: 'Discover/page/CreatorsAll'
+              url: 'Discover/pages/CreatorsAll'
             }).then(() => {
               console.info('push page success');
             }).catch((err: BusinessError) => {
@@ -109,15 +109,15 @@ export default struct Recommend {
       .justifyContent(FlexAlign.SpaceBetween)
 
       Row() {
-        ForEach(users.slice(0, 4), (user: User) => {
+        ForEach(CreatorList.slice(0, 4), (Creator: CreatorItem) => {
           Column() {
-            Image(user.avatar)
+            Image(Creator.avatar)
               .width(60)
               .height(60)
               .borderRadius(30)
               .margin({ bottom: 8 })
 
-            Text(user.name)
+            Text(Creator.name)
               .fontSize(12)
               .fontWeight(500)
               .fontColor('#333333')

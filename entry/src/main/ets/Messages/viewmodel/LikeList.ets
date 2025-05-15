@@ -1,4 +1,4 @@
-import LikeItem from "../model/LikeItem";
+import LikeItem from "../view/LikeItem";
 
 const LikeList: LikeItem[] = [
   new LikeItem(1,'舞蹈达人','评论了你的视频','30分钟前'),

@@ -1,10 +1,10 @@
-import Recommend from '../view/Recommend'
-import Popular from '../view/Popular';
-import Music from '../view/Music';
-import Dance from '../view/Dance';
-import Game from '../view/Game';
-import Food from '../view/Food';
-import Travel from '../view/Travel';
+import Recommend from '../component/Recommend'
+import Popular from '../component/Popular';
+import Music from '../component/Music';
+import Dance from '../component/Dance';
+import Game from '../component/Game';
+import Food from '../component/Food';
+import Travel from '../component/Travel';
 
 @Entry
 @Component

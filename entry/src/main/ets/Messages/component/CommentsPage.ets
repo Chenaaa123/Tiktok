@@ -1,6 +1,6 @@
 
-import LikeItem from '../model/LikeItem';
-import LikeList from '../modelview/LikeList';
+import LikeItem from '../view/LikeItem';
+import LikeList from '../viewmodel/LikeList';
 
 @Component
 export default struct CommentsPage {

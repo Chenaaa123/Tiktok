@@ -1,4 +1,4 @@
-import TrendingItem from '../viewmodel/TrendingItem'
+import TrendingItem from '../view/TrendingItem'
 
 const TrendingContentList: TrendingItem[] = [
   new TrendingItem(1, 'dance', '最新流行舞蹈教学，简单易学的舞步', '1.2万点赞', '254评论', '舞蹈达人', '0:45', $r('app.media.pexels'), $r('app.media.userA')),

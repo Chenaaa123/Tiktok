@@ -1,6 +1,6 @@
 
-import PrivateMessageItem from '../model/PrivateMessageItem';
-import PrivateMessageList from '../modelview/PrivateMessageList';
+import PrivateMessageItem from '../view/PrivateMessageItem';
+import PrivateMessageList from '../viewmodel/PrivateMessageList';
 
 @Component
 export default struct PrivateMessagesPage {

@@ -2,6 +2,8 @@ import CommentsPage from '../component/CommentsPage';
 import MentionsPage from '../component/MentionsPage';
 import NotificationsPage from '../component/NotificationsPage';
 import PrivateMessagesPage from '../component/PrivateMessagesPage';
+import { router } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 
 @Entry
@@ -82,6 +84,15 @@ struct Messages {
             .fontSize(24)
             .fontColor('#fff')
             .margin({ left: 16 })
+            .onClick(()=>{
+              router.pushUrl({
+                url: 'Discover/pages/Discover'
+              }).then(() => {
+                console.info('push page success');
+              }).catch((err: BusinessError) => {
+                console.error(`pushUrl failed, code is ${err.code}, message is ${err.message}`);
+              })
+            })
           Blank().layoutWeight(1)
           Text('消息')
             .fontSize(20)

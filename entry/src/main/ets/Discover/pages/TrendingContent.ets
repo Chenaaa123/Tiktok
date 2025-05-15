@@ -1,7 +1,7 @@
 // TrendingContent.ets
 import router from '@ohos.router';
-import { TrendingContentList } from '../model/TrendingContentList';
-import TrendingItem from '../viewmodel/TrendingItem';
+import { TrendingContentList } from '../viewmodel/TrendingContentList';
+import TrendingItem from '../view/TrendingItem';
 
 @Entry
 @Component
@@ -183,7 +183,7 @@ struct TrendingContent {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor('#000000')
+    .backgroundColor(Color.Black)
   }
 }
 

@@ -1,14 +1,14 @@
-import User from "./UserItem";
+import creator from "./CreatorItem";
 
 // 定义推荐内容接口
 export default class  RecommendItem {
   id: number;
   coverImage: Resource;
   title: string;
-  author: User;
+  author: creator;
   viewCount: number;
 
-  constructor(id: number,coverImage: Resource,title: string,author: User,viewCount: number) {
+  constructor(id: number,coverImage: Resource,title: string,author: creator,viewCount: number) {
     this.id = id
     this.coverImage = coverImage
     this.title = title

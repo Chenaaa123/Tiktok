@@ -1,6 +1,6 @@
 import { Prompt } from '@kit.ArkUI';
-import NotificationList from '../modelview/NotificationList';
-import NotificationItem from '../model/NotificationItem';
+import NotificationList from '../viewmodel/NotificationList';
+import NotificationItem from '../view/NotificationItem';
 
 @Component
 export default struct NotificationsPage {

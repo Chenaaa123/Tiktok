@@ -1,4 +1,4 @@
-import { Mention } from '../model/interfaces';
+import { Mention } from '../view/interfaces';
 
 @Component
 export default struct MentionsPage {

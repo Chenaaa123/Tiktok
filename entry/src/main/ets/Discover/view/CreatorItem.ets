@@ -1,5 +1,5 @@
 // 定义用户接口
-export default class User {
+export default class creator {
   id: number
   name: string
   avatar: Resource

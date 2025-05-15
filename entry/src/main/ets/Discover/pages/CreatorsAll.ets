@@ -1,11 +1,12 @@
 import { router } from '@kit.ArkUI'
-import { users } from '../model/UserModel'
-import User from "../viewmodel/UserItem"
+import { CreatorList } from '../viewmodel/CreatorList'
+import CreatorItem from "../view/CreatorItem"
 // creators_all.ets
 @Entry
 @Component
 struct CreatorsAll {
   @State currentFilter: string = 'all'
+  @State animationStates: Map<string, boolean> = new Map()
   private getFilterName(filter: string): string {
     const filterMap: Record<string, string> = {
       'all': '全部',
@@ -64,9 +65,9 @@ struct CreatorsAll {
 
       // 创作者网格
       Grid() {
-        ForEach(users.filter(creator =>
+        ForEach(CreatorList.filter(creator =>
         this.currentFilter === 'all' || creator.category === this.currentFilter
-        ), (creator:User) => {
+        ), (creator:CreatorItem) => {
           GridItem() {
             Column() {
               // 头像
@@ -126,27 +127,46 @@ struct CreatorsAll {
               }
 
               // 关注按钮
-              Button(creator.followed ? '已关注' : '关注')
-                .width(80)
-                .height(30)
-                .fontSize(12)
-                .fontWeight(FontWeight.Bold)
-                .backgroundColor(creator.followed ?  '#ff5a5a5a':'#FF0050')
-                .border({
-                  width: creator.followed ? 1 : 0,
-                  color: '#FF0050'
-                })
-                .borderRadius(15)
-                .margin({ top: 10 })
-                .onClick(() => {
-                  creator.followed = !creator.followed
-                })
+              Button() {
+                Text(creator.followed ? '已关注' : '关注')
+                  .fontSize(12)
+                  .fontWeight(FontWeight.Bold)
+                  .fontColor(Color.White)
+              }
+              .width(80)
+              .height(30)
+              .backgroundColor(creator.followed ? '#ff5a5a5a' : '#FF0050')
+              .border({
+                width: creator.followed ? 1 : 0,
+                color: '#FF0050'
+              })
+              .borderRadius(15)
+              .margin({ top: 10 })
+              .stateEffect(true)
+              .onClick(() => {
+                creator.followed = !creator.followed;
+                // 触发动画
+                this.animationStates.set(creator.id.toString(), true)
+                // 1秒后重置动画状态
+                setTimeout(() => {
+                  this.animationStates.set(creator.id.toString(), false)
+                }, 1000)
+              })
             }
             .width('100%')
             .height(280)
             .padding(15)
             .backgroundColor('#1A1A1A')
             .borderRadius(12)
+            .scale({
+              scale: this.animationStates.get(creator.id.toString()) ? 1.1 : 1.0
+            } as ScaleOptions)
+            .animation({
+              duration: 1000,
+              curve: Curve.EaseInOut,
+              iterations: 1,
+              playMode: PlayMode.Alternate
+            })
             .onClick(() => {
               router.pushUrl({
                 url: 'pages/profile_creator',
@@ -165,6 +185,6 @@ struct CreatorsAll {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor('#000000')
+    .backgroundColor(Color.Black)
   }
 }
