@@ -1,9 +1,9 @@
 {
   "src": [
-<<<<<<< HEAD
     "Messages/pages/Messages"
-=======
-    "pages/Index"
->>>>>>> ff7103515f6bc112ca6bc2d991a62918637a45e7
+    "Discover/page/Discover",
+    "Discover/page/text1",
+    "Discover/page/CreatorsAll",
+    "Discover/page/TrendingContent"
   ]
 }
