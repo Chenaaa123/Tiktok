@@ -4,6 +4,8 @@
     "Discover/pages/Discover",
     "Discover/pages/text1",
     "Discover/pages/CreatorsAll",
-    "Discover/pages/TrendingContent"
+    "Discover/pages/TrendingContent",
+    "Create/page/Create",
+    "Create/page/test1"
   ]
 }
