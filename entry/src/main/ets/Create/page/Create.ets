@@ -4,8 +4,10 @@ import { router } from '@kit.ArkUI';
 
 @Entry
 @Component
+
 export default struct Create {
   @State text: string = '';
+
   @State current_index: number = 0
   @Styles style1(){
     .width(80)
@@ -28,6 +30,7 @@ export default struct Create {
     }
   }
 
+
   @Builder
   tabContent(content:string){
     Button(content)
@@ -48,6 +51,7 @@ export default struct Create {
         promptAction.showToast({message:message})
       })
   }
+
 
   build() {
     Column(){
@@ -85,22 +89,43 @@ export default struct Create {
           Row(){
             Tabs(){
               TabContent(){
-                this.tabContent('+')
+
+                Button('+')
+                  .backgroundColor('rgba(255,255,255,0.1)')
+                  .fontColor('white')
+                  .fontSize(40)
+                  .style1()
+
               }.tabBar(this.tabBuilder(0,'视频'))
               .backgroundColor('#1a1a1a')
 
               TabContent(){
-                this.tabContent('📷')
+
+                Button('📷')
+                  .backgroundColor('rgba(255,255,255,0.1)')
+                  .fontSize(40)
+                  .style1()
+
               }.tabBar(this.tabBuilder(1,'照片'))
               .backgroundColor('#1a1a1a')
 
               TabContent(){
-                this.tabContent('🎵')
+
+                Button('🎵')
+                  .backgroundColor('rgba(255,255,255,0.1)')
+                  .fontSize(40)
+                  .style1()
+
               }.tabBar(this.tabBuilder(2,'音乐'))
               .backgroundColor('#1a1a1a')
 
               TabContent(){
-                this.tabContent('📝')
+
+                Button('📝')
+                  .backgroundColor('rgba(255,255,255,0.1)')
+                  .fontSize(40)
+                  .style1()
+
               }.tabBar(this.tabBuilder(3,'文字'))
               .backgroundColor('#1a1a1a')
             }
@@ -113,27 +138,65 @@ export default struct Create {
 
           Row(){
             Column(){
-              this.buttonBuilder('✂️','进行裁剪')
+
+              Button('✂️')
+                .backgroundColor('rgba(255,255,255,0.1)')
+                .height('50')
+                .width('50')
+                .onClick(()=>{
+                  promptAction.showToast({message:'进行裁剪'})
+                })
+
               Text('裁剪')
                 .fontColor('white')
             }
             Column(){
-              this.buttonBuilder('🎨','使用滤镜')
+
+              Button('🎨')
+                .backgroundColor('rgba(255,255,255,0.1)')
+                .height('50')
+                .width('50')
+                .onClick(()=>{
+                  promptAction.showToast({message:'使用滤镜'})
+                })
+
               Text('滤镜')
                 .fontColor('white')
             }
             Column(){
-              this.buttonBuilder('✨','添加特效')
+
+              Button('✨')
+                .backgroundColor('rgba(255,255,255,0.1)')
+                .height('50')
+                .width('50')
+                .onClick(()=>{
+                  promptAction.showToast({message:'添加特效'})
+                })
+
               Text('特效')
                 .fontColor('white')
             }
             Column(){
-              this.buttonBuilder('⚡','调节画面')
+              Button('⚡')
+                .backgroundColor('rgba(255,255,255,0.1)')
+                .height('50')
+                .width('50')
+                .onClick(()=>{
+                  promptAction.showToast({message:'调节画面'})
+                })
+
               Text('调节')
                 .fontColor('white')
             }
             Column(){
-              this.buttonBuilder('💬','添加字幕')
+              Button('💬')
+                .backgroundColor('rgba(255,255,255,0.1)')
+                .height('50')
+                .width('50')
+                .onClick(()=>{
+                  promptAction.showToast({message:'添加字幕'})
+                })
+
               Text('字幕')
                 .fontColor('white')
             }
@@ -169,6 +232,7 @@ export default struct Create {
                 .onClick(()=>{
                   router.pushUrl({url:'Music/pages/musicPage'})
                 })
+
               Text('音乐封面')
                 .fontColor('white')
                 .fontSize(20)
@@ -201,6 +265,7 @@ export default struct Create {
 
           Row(){
             Stack({alignContent:Alignment.BottomStart}){
+
               TextArea({placeholder:'添加视频描述...',text:this.text})
                 .backgroundColor('rgba(255,255,255,0.2)')
                 .showCounter(true)
@@ -210,13 +275,16 @@ export default struct Create {
                 .onChange((text)=>{
                   this.text = text
                 })
+
               Text('#')
                 .fontColor('rgba(255,255,255,0.3)')
                 .fontSize(25)
                 .margin({left:30,bottom:10})
+
                 .onClick(()=>{
                   this.text = this.text + '#'
                 })
+
             }
           }
           .width('95%')
