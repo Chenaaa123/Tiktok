@@ -1,4 +1,4 @@
-import PrivateMessageItem from '../view/PrivateMessageItem';
+import PrivateMessageItem from '../model/PrivateMessageItem';
 
 const PrivateMessageList: PrivateMessageItem[] = [
   new PrivateMessageItem(1, '舞蹈达人', '你好，请问你对最新的舞蹈视频有什么建议吗？', 2, '10分钟前'),

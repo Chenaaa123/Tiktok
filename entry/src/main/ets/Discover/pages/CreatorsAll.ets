@@ -1,12 +1,19 @@
 import { router } from '@kit.ArkUI'
 import { CreatorList } from '../viewmodel/CreatorList'
-import CreatorItem from "../view/CreatorItem"
+import CreatorItem from "../model/CreatorItem"
+
+
 // creators_all.ets
+PersistentStorage.persistProp("persistedMapString", new Map<number, string>([]));
+
 @Entry
 @Component
 struct CreatorsAll {
   @State currentFilter: string = 'all'
   @State animationStates: Map<string, boolean> = new Map()
+  @State attentionList: Array<CreatorItem> = []
+  @StorageLink("persistedMapString") persistedMapString: Map<number, string> = new Map<number, string>([]);
+
   private getFilterName(filter: string): string {
     const filterMap: Record<string, string> = {
       'all': '全部',
@@ -60,14 +67,13 @@ struct CreatorsAll {
       }
       .scrollable(ScrollDirection.Horizontal)
       .width('100%')
-      .height(48)
-      // .border({ bottom: { width: 1, color: '#333333' } })
+      .height('auto')
+
 
       // 创作者网格
       Grid() {
         ForEach(CreatorList.filter(creator =>
-        this.currentFilter === 'all' || creator.category === this.currentFilter
-        ), (creator:CreatorItem) => {
+        this.currentFilter === 'all' || creator.category === this.currentFilter), (creator:CreatorItem) => {
           GridItem() {
             Column() {
               // 头像
@@ -77,6 +83,19 @@ struct CreatorsAll {
                 .borderRadius(40)
                 .border({ width: 2, color: '#FF0050' })
                 .margin({ bottom: 10 })
+                .onClick(()=>{
+                  let paramsInfo: CreatorItem = creator
+                  router.pushUrl({
+                    url: 'Discover/pages/text1', // 目标url
+                    params: paramsInfo // 添加params属性，传递自定义参数
+                  }, (err) => {
+                    if (err) {
+                      console.error(`Invoke pushUrl failed, code is ${err.code}, message is ${err.message}`);
+                      return;
+                    }
+                    console.info('Invoke pushUrl succeeded.');
+                  })
+                })
 
               // 创作者信息
               Text(creator.name)
@@ -128,7 +147,8 @@ struct CreatorsAll {
 
               // 关注按钮
               Button() {
-                Text(creator.followed ? '已关注' : '关注')
+                // Text(creator.followed ? '已关注' : '关注')
+                Text(!this.persistedMapString.has(creator.id as number) ? '关注' : '已关注')
                   .fontSize(12)
                   .fontWeight(FontWeight.Bold)
                   .fontColor(Color.White)
@@ -144,7 +164,62 @@ struct CreatorsAll {
               .margin({ top: 10 })
               .stateEffect(true)
               .onClick(() => {
-                creator.followed = !creator.followed;
+                // creator.followed = !creator.followed;
+                // const list = this.list1.filter(item=>item.id===creator.id)
+                // let templList:creator[] =[]
+                // console.log(`${JSON.stringify(list)}`);
+
+                // this.list1.forEach(element => {
+                //   if (element.id === creator.id) {
+                //     templList.
+                //   }
+                //
+                // });
+                // this.list1 = templList
+
+                // this.attentionList = this.attentionList.concat(creator)
+                // for (let attentionListElement of this.attentionList) {
+                //   console.log("collectWordDataList Element " + attentionListElement.name);
+                //   if (!this.persistedMapString.has(attentionListElement.id as number)) {
+                //     this.persistedMapString.set(attentionListElement.id as number,
+                //       attentionListElement.name as string)
+                //   } else {
+                //     this.persistedMapString.delete(attentionListElement.id as number)
+                //   }
+                // }
+
+                // this.attentionList = this.attentionList.concat(creator)
+                // for (let attentionListElement of this.attentionList) {
+                //   console.log("attentionListElement Element " + attentionListElement.name);
+                //   if (!this.persistedMapString.has(attentionListElement.id as number)) {
+                //     this.persistedMapString.set(attentionListElement.id as number,
+                //       attentionListElement.name as string)
+                //   } else {
+                //     this.persistedMapString.delete(attentionListElement.id as number)
+                //     const index = this.attentionList.findIndex(item => item.id === creator.id);
+                //     if (index !== -1) {
+                //       this.attentionList.splice(index, 1);
+                //     }
+                //   }
+                // }
+
+                // 检查是否已关注（persistedMapString 是否已有该用户 id）
+                const isAlreadyFollowing = this.persistedMapString.has(creator.id as number);
+
+                if (!isAlreadyFollowing) {
+                  // 1. 未关注 → 添加
+                  this.attentionList = this.attentionList.concat(creator);
+                  this.persistedMapString.set(creator.id as number, creator.name as string);
+                } else {
+                  // 2. 已关注 → 移除
+                  this.attentionList = this.attentionList.filter(item => item.id !== creator.id);
+                  this.persistedMapString.delete(creator.id as number);
+                }
+
+                // 打印当前关注列表
+                console.log("Current attentionList:", this.attentionList.map(user => user.name));
+
+
                 // 触发动画
                 this.animationStates.set(creator.id.toString(), true)
                 // 1秒后重置动画状态
@@ -180,7 +255,7 @@ struct CreatorsAll {
       .columnsGap(15)
       .rowsGap(15)
       .width('100%')
-      .height('100%')
+      .height('85%')
       .padding(15)
     }
     .width('100%')

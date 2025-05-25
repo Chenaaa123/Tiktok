@@ -1,5 +1,5 @@
 
-import LikeItem from '../view/LikeItem';
+import LikeItem from '../model/LikeItem';
 import LikeList from '../viewmodel/LikeList';
 
 @Component

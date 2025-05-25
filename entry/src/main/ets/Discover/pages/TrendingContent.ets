@@ -1,7 +1,7 @@
 // TrendingContent.ets
 import router from '@ohos.router';
 import { TrendingContentList } from '../viewmodel/TrendingContentList';
-import TrendingItem from '../view/TrendingItem';
+import TrendingItem from '../model/TrendingItem';
 
 @Entry
 @Component

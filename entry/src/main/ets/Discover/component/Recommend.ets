@@ -1,10 +1,11 @@
 import DividerTmp from "../viewmodel/DividerTmp"
 import { recommendList } from "../viewmodel/RecommendList"
-import RecommendItem from "../view/RecommendListItem"
-import CreatorItem from "../view/CreatorItem"
+import RecommendItem from "../model/RecommendListItem"
+import CreatorItem from "../model/CreatorItem"
 import { router } from "@kit.ArkUI"
 import { BusinessError } from "@kit.BasicServicesKit"
 import { CreatorList } from "../viewmodel/CreatorList"
+
 
 // 推荐
 @Component
@@ -116,6 +117,19 @@ export default struct Recommend {
               .height(60)
               .borderRadius(30)
               .margin({ bottom: 8 })
+              .onClick(()=>{
+                let paramsInfo: CreatorItem = Creator
+                router.pushUrl({
+                  url: 'Discover/pages/text1', // 目标url
+                  params: paramsInfo // 添加params属性，传递自定义参数
+                }, (err) => {
+                  if (err) {
+                    console.error(`Invoke pushUrl failed, code is ${err.code}, message is ${err.message}`);
+                    return;
+                  }
+                  console.info('Invoke pushUrl succeeded.');
+                })
+              })
 
             Text(Creator.name)
               .fontSize(12)

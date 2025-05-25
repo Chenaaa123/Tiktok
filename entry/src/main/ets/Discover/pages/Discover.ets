@@ -8,7 +8,7 @@ import Travel from '../component/Travel';
 
 @Entry
 @Component
-struct Discover {
+export default struct Discover {
   @State InputText: string = ''
   @State currentIndex: number = 0
   @State categoryName: string = '推荐' // 设置默认值

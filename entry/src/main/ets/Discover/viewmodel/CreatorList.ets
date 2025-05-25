@@ -1,4 +1,4 @@
-import creator from '../view/CreatorItem';
+import creator from '../model/CreatorItem';
 
 // 创建用户数据数组
 const CreatorList: creator[] = [

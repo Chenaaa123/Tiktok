@@ -1,4 +1,4 @@
-import NotificationItem from "../view/NotificationItem";
+import NotificationItem from "../model/NotificationItem";
 
 
 const NotificationList: NotificationItem[] = [

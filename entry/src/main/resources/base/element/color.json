@@ -11,6 +11,14 @@
     {
       "name": "discover_menu_clicked",
       "value": "#FF0050"
+    },
+    {
+      "name": "tab_click_color",
+      "value": "#0275fa"
+    },
+    {
+      "name": "tab_color",
+      "value": "#676c7f"
     }
   ]
 }

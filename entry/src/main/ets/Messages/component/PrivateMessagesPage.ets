@@ -1,5 +1,5 @@
 
-import PrivateMessageItem from '../view/PrivateMessageItem';
+import PrivateMessageItem from '../model/PrivateMessageItem';
 import PrivateMessageList from '../viewmodel/PrivateMessageList';
 
 @Component

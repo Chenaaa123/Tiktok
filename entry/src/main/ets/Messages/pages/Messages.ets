@@ -8,7 +8,7 @@ import { BusinessError } from '@kit.BasicServicesKit';
 
 @Entry
 @Component
-struct Messages {
+export default struct Messages {
   @State currentTab: string = 'private' // 当前选中的标签
   @State searchText: string = '' // 搜索文本
   @State currentNav: string = 'message' // 当前导航

@@ -1,4 +1,4 @@
-import RecommendItem from '../view/RecommendListItem';
+import RecommendItem from '../model/RecommendListItem';
 import { CreatorList } from './CreatorList';
 
 

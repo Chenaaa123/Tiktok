@@ -4,6 +4,11 @@
     "Discover/pages/Discover",
     "Discover/pages/text1",
     "Discover/pages/CreatorsAll",
-    "Discover/pages/TrendingContent"
+    "Discover/pages/TrendingContent",
+    "Home/pages/Index_Recommendation",
+    "Home/pages/Index",
+    "Create/page/Create",
+    "Create/page/test1",
+    "Music/pages/musicPage"
   ]
 }
