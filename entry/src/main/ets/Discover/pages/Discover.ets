@@ -5,15 +5,19 @@ import Dance from '../component/Dance';
 import Game from '../component/Game';
 import Food from '../component/Food';
 import Travel from '../component/Travel';
+import { promptAction, router } from '@kit.ArkUI';
+import { getUserByUsername } from '../viewmodel/CreatorList';
+import CreatorItem from '../model/CreatorItem';
 
 @Entry
 @Component
 export default struct Discover {
   @State InputText: string = ''
+  @State searchResult: CreatorItem | null = null
   @State currentIndex: number = 0
   @State categoryName: string = '推荐' // 设置默认值
 
-  @Builder
+  @Builder    // 顶部Tab栏
   tabBuilder(title: string, targetIndex: number) {
     Button(title)
       .fontSize(14)
@@ -27,12 +31,18 @@ export default struct Discover {
 
   build() {
     Column() {
-      // 顶部标题栏 - 固定高度
+      // 顶部标题栏
       Row() {
-        Image($r('app.media.back'))
+        Image($r('app.media.back'))   // 返回箭头
           .width(30)
           .margin({ left: 10 })
-        Text(`发现 - ${this.categoryName}`)
+          .onClick(()=>{
+            router.pushUrl({
+              url: "Home/pages/Index",
+            })
+            router.clear()
+          })
+        Text(`发现 - ${this.categoryName}`)  // 根据点击tab栏改变标题
           .margin({ right: 10 })
           .fontColor(Color.White)
           .fontSize(16)
@@ -42,7 +52,7 @@ export default struct Discover {
       .height(50)
       .justifyContent(FlexAlign.SpaceBetween)
 
-      // 搜索框 - 固定高度
+      // 搜索框
       Row() {
         Image($r('app.media.search'))
           .height(16)
@@ -56,18 +66,45 @@ export default struct Discover {
           .fontSize(12)
           .placeholderFont({ size: 12 })
           .onChange((value: string) => {
-            this.InputText = value
+            this.InputText = value    // 更新搜索框的值
+          })
+        Button('搜索')    // 搜索按钮，进行用户搜索
+          .height(40)
+          .fontColor(Color.White)
+          .fontSize(12)
+          .padding({ left: 15, right: 15 })
+          .backgroundColor('#333333')
+          .borderRadius(20)
+          .position({ right: -3})
+          .onClick(() => {
+            // 1. 执行搜索、通过用户名得到用户信息
+            this.searchResult = getUserByUsername(this.InputText)
+
+            if (this.searchResult) {    // 如果搜索到用户
+              // 2. 跳转并传递用户数据
+              router.pushUrl({
+                url: 'Mine/pages/ProfileCreator',
+                params: this.searchResult   // 传递用户数据
+              })
+              this.InputText = ''    // 清空搜索框
+            } else {
+              promptAction.showToast({
+                message: '未找到该用户',
+                duration: 1500, // 持续时间为3秒
+              })
+            }
+            console.log('搜索:', this.InputText)
           })
       }
-          .borderRadius(20)
-          .width('94%')
-          .backgroundColor('#333333')
-          .margin({ left: 10, right: 10, top: 5 })
-          .height(40)
+      .borderRadius(20)
+      .width('94%')
+      .backgroundColor('#333333')
+      .margin({ left: 10, right: 10, top: 5 })
+      .height(40)
 
         // 主内容区 - 使用剩余空间
         Column() {
-          Tabs({ barPosition: BarPosition.Start }) {
+          Tabs({ barPosition: BarPosition.Start }) {   // Tab 栏在顶部
             TabContent() {
               Recommend()
             }.tabBar(this.tabBuilder('推荐', 0))
@@ -96,7 +133,7 @@ export default struct Discover {
               Travel()
             }.tabBar(this.tabBuilder('旅游', 6))
           }
-          .onChange((index: number) => {
+          .onChange((index: number) => {    // Tab栏切换时，更新当前索引和标题
             this.currentIndex = index;
             switch (index) {
               case 0:
@@ -125,17 +162,17 @@ export default struct Discover {
             }
           })
           .padding(0)
-          .barMode(BarMode.Scrollable)
+          .barMode(BarMode.Scrollable)    // 支持横向滚动
           .backgroundColor('#000')
           .barHeight(40) // 设置标签栏高度
         }
         .width('100%')
-        .height('100%') // 使用剩余空间
+        .height('100%')
         .margin({ top: 5 })
 
       }
       .width('100%')
-      .height('90%') // 填满整个屏幕
+      .height('90%')
       .backgroundColor('#000')
     }
   }

@@ -2,11 +2,21 @@
 import router from '@ohos.router';
 import { TrendingContentList } from '../viewmodel/TrendingContentList';
 import TrendingItem from '../model/TrendingItem';
+import defaultFilter from '../model/defaultFilter';
 
 @Entry
 @Component
-struct TrendingContent {
+export default struct TrendingContent {
   @State currentFilter: string = 'all'
+
+  aboutToAppear() {
+    const params = JSON.stringify(router.getParams()) ;
+    const paramsObject = JSON.parse(params) as defaultFilter;
+    this.currentFilter = paramsObject.defaultFilter as string;   // 获取传递过来的默认分类
+    console.log('TrendingContent aboutToAppear', paramsObject);
+  }
+
+
   private getFilterName(filter: string): string {
     const filterMap: Record<string, string> = {
       'all': '全部',
@@ -44,7 +54,7 @@ struct TrendingContent {
       Scroll() {
         Row() {
           ForEach(['all', 'music', 'dance', 'food', 'travel', 'comedy', 'fitness'], (filter :string) => {
-            Text(this.getFilterName(filter))
+            Text(this.getFilterName(filter))  // 标签
               .fontSize(14)
               .fontColor(Color.White)
               .padding({ left: 16, right: 16, top: 8, bottom: 8 })
@@ -61,18 +71,18 @@ struct TrendingContent {
       .scrollable(ScrollDirection.Horizontal)
       .width('100%')
       .height(48)
-      // .border({ bottom: { width: 1, color: '#FFFFFF20' } })
+
 
       // 内容网格
       Grid() {
-        ForEach(TrendingContentList.filter(item =>
-        this.currentFilter === 'all' || item.category === this.currentFilter
+        ForEach(TrendingContentList.filter(item =>    // 应该从viewModel过滤获取数据
+          item.category === this.currentFilter || this.currentFilter === 'all'
         ), (item: TrendingItem) => {
           GridItem() {
             Column() {
               // 缩略图区域
               Stack() {
-                Image(item.thumbnail)
+                Image(item.thumbnail)   // 音视频缩放图
                   .width('100%')
                   .aspectRatio(1)
                   .objectFit(ImageFit.Cover)
@@ -94,8 +104,8 @@ struct TrendingContent {
                   .position({ x: 10, y: 10 })
 
                 // 播放按钮
-                Column() {
-                  Image(item.category === 'music' ? $r('app.media.note'): $r('app.media.play'))
+                Column() {      // 如果是音乐则显示音乐播放图标，如果是视频则显示视频播放图标
+                  Image(item.category === 'music' ? $r('app.media.note'): $r('app.media.play')) // 只有音乐和视频，通过三目判断
                     .width(30)
                     .height(30)
                     .opacity(8)
@@ -108,6 +118,13 @@ struct TrendingContent {
                 .alignItems(HorizontalAlign.Center)
                 .position({ x: '50%', y: '50%' })
                 .translate({ x: -20, y: -20 })
+                .onClick(() => {
+                  if(item.category === 'music')    // 如果是音乐则跳转到音乐播放页面，如果是视频则跳转到视频播放页面
+                  router.pushUrl({
+                    url: 'Discover/pages/Music',
+                    params: item  // 传递音乐信息
+                  })
+                })
 
                 // 时长
                 Text(item.duration)
@@ -128,7 +145,7 @@ struct TrendingContent {
 
               // 视频信息
               Column() {
-                Text(item.title)
+                Text(item.title)    // 视频标题
                   .fontSize(14)
                   .fontColor(Color.White)
                   .maxLines(2)
@@ -136,7 +153,7 @@ struct TrendingContent {
                   .margin({ bottom: 5 })
 
                 Row() {
-                  Text(item.likes)
+                  Text(item.likes)  // 点赞数
                     .fontColor(Color.White)
                     .fontSize(12)
                     .margin({ right: 10 })
@@ -147,7 +164,7 @@ struct TrendingContent {
                 .margin({ bottom: 5 })
 
                 Row() {
-                  Image(item.avatar)
+                  Image(item.avatar)  // 作者头像
                     .width(20)
                     .height(20)
                     .borderRadius(10)
@@ -164,22 +181,16 @@ struct TrendingContent {
             .width('100%')
             .backgroundColor('#ff1d181d')
             .borderRadius(12)
-            .onClick(() => {
-              router.pushUrl({
-                url: 'pages/VideoPlayer',
-                params: { id: item.id.toString() }
-              })
-            })
           }
           .padding(5)
         }
         )}
-      .columnsTemplate('1fr 1fr')
-      .columnsGap(5)
-      .rowsGap(5)
+      .columnsTemplate('1fr 1fr')   // 两列等宽
+      .columnsGap(5)    // 列与列之间的间距
+      .rowsGap(5)      // 行与行之间的间距
       .padding(10)
       .width('100%')
-      .layoutWeight(1)
+      .layoutWeight(1)    // 占满剩余空间
     }
     .width('100%')
     .height('100%')

@@ -133,7 +133,7 @@ struct Audio2Page {
     this.releaseCallback()
     this.setAVPlayerCallback(this.avPlayer)
     let context = getContext(this) as common.UIAbilityContext
-    let fd = await context.resourceManager.getRawFd('smile.mp3')
+    let fd = await context.resourceManager.getRawFd('Music/勋章.mp3')
     let afd: media.AVFileDescriptor = {
       fd: fd.fd,
       offset: fd.offset,

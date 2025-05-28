@@ -5,4 +5,4 @@ const LikeList: LikeItem[] = [
   new LikeItem(2,'旅行达人','评论了你的照片','昨天 12:30'),
 ];
 
-export default LikeList;
+export  { LikeList };

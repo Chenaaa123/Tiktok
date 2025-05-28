@@ -18,7 +18,7 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
-
+                              // Home/pages/Index        Discover/pages/text1
     windowStage.loadContent('Home/pages/Index', (err) => {
 
       if (err.code) {

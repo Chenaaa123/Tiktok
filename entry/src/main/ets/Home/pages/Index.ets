@@ -2,7 +2,8 @@ import Create from '../../Create/page/Create'
 import Discover from '../../Discover/pages/Discover'
 import Messages from '../../Messages/pages/Messages'
 import Index_Recommendation from './Index_Recommendation'
-import { window } from '@kit.ArkUI'
+
+import ProfileCenter from '../../Mine/pages/ProfileCenter'
 import tabs from '../model/Tabmodel'
 import {Tabs} from '../model/Tabmodel'
 
@@ -10,8 +11,6 @@ import {Tabs} from '../model/Tabmodel'
 @Component
 struct Index {
   @State activeName: string = '首页'
-  //路由栈, (控制跳转）
-  @Provide pageInfos: NavPathStack = new NavPathStack()
 
   // tabs
   @Builder
@@ -29,13 +28,11 @@ struct Index {
           this.activeName = item.name
         })
       })
-    }.width('100%').height('100%').justifyContent(FlexAlign.SpaceAround).backgroundColor(Color.White)
+    }.width('100%').height('100%').justifyContent(FlexAlign.SpaceAround).backgroundColor(Color.Black)
   }
 
-
-
   build() {
-    Navigation(this.pageInfos) {
+    Navigation() {
       if (this.activeName === '首页') {
         Index_Recommendation()
       }
@@ -49,12 +46,12 @@ struct Index {
         Messages()
       }
       else {
-        Messages()
+        ProfileCenter()
       }
     }
     .height('100%')
     .width('100%')
-    .backgroundColor(Color.White)
+    .backgroundColor(Color.Black)
     .toolbarConfiguration(this.tabBarBuilder) // 设置自定义tabBar
   }
 }

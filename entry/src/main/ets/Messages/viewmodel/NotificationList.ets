@@ -7,4 +7,4 @@ const NotificationList: NotificationItem[] = [
   new NotificationItem(3,'评论','用户D评论了你的帖子','3小时前'),
 ];
 
-export default NotificationList;
+export { NotificationList };

@@ -1,16 +1,23 @@
 {
   "src": [
     "Messages/pages/Messages",
+    "Messages/pages/ChatPage",
+    "Messages/pages/UserProfile",
     "Discover/pages/Discover",
-    "Discover/pages/text1",
     "Discover/pages/CreatorsAll",
     "Discover/pages/TrendingContent",
+    "Discover/pages/Music",
     "Home/pages/Index_Recommendation",
     "Home/pages/Index",
+    "Home/pages/Audio2Page",
     "Create/page/Create",
     "Create/page/test1",
-    "Music/pages/musicPage"
-
-
+    "Mine/pages/ProfileCreator",
+    "Mine/pages/ProfileCenter",
+    "Mine/pages/CompileData",
+    "Mine/pages/ProfileFans",
+    "Create/page/MusicPage",
+    "Home/pages/CommentsPage",
+    "Home/pages/VideoDetail"
   ]
 }
